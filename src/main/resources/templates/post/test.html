@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="mb-3">
+  <label>음악 검색</label>
+  <div class="input-group">
+    <input type="text" id="musicQuery" class="form-control" placeholder="검색할 음악을 입력하세요" />
+    <button type="button" class="btn btn-primary" onclick="searchMusic()">검색</button>
+  </div>
+</div>
+
+<!-- 검색 결과를 보여줄 영역 -->
+<div id="searchResult" class="mt-3"></div>
+
+<script>
+  function searchMusic() {
+    const query = document.getElementById("musicQuery").value;
+
+    fetch(`/post/post?query=${encodeURIComponent(query)}`)
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("searchResult").innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById("searchResult").innerHTML = "검색 중 오류 발생";
+        console.error(err);
+      });
+  }
+</script>
+
+</body>
+</html>
