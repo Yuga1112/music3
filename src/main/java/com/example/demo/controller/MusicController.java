@@ -17,7 +17,7 @@ import com.example.demo.service.MusicService;
 import com.example.demo.service.PlaylistService;
 
 @RestController
-@RequestMapping("/music")
+@RequestMapping("/")
 public class MusicController {
 
 	@Autowired
@@ -26,26 +26,14 @@ public class MusicController {
 	@Autowired
 	PlaylistService playlistService;
 
-	@GetMapping("/playlist")
+	@GetMapping("/")
     public ResponseEntity<List<MusicDTO>> getPlaylistTracks(@RequestParam String playlistId) {
-        List<MusicDTO> musicList = musicService.getPlaylist(playlistId);
+        List<MusicDTO> musicList = musicService.getPlaylist("")
         return ResponseEntity.ok(musicList);
     }
 
 
-	// 3. 특정 음악 상세 조회
-	@GetMapping("/{id}")
-	@GetMapping("/playlist/{playlistId}")
-	public ResponseEntity<List<MusicDTO>> getPlaylistTracks(@PathVariable String playlistId) {
-	    List<MusicDTO> musicList = musicService.getPlaylist(playlistId);
-	    return ResponseEntity.ok(musicList);
+	
+
 	}
 
-
-	// 4. 음악 검색 (예: Spotify API 연동)
-	@GetMapping("/search")
-	public ResponseEntity<List<MusicDTO>> searchMusic(@RequestParam String query) throws Exception {
-		List<MusicDTO> result = musicService.search(query);
-		return ResponseEntity.ok(result);
-	}
-}

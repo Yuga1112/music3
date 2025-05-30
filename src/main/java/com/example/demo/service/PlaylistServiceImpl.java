@@ -22,7 +22,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 
 	        List<PlaylistDTO> dtoList = new ArrayList<>();
 	        for (Playlist entity : entities) {
-	            dtoList.add(new PlaylistDTO(entity));  // 직접 변환
+	            dtoList.add(new PlaylistDTO(entity));  
 	        }
 		return dtoList;
 	}
