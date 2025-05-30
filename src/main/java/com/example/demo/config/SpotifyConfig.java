@@ -3,6 +3,8 @@ package com.example.demo.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+// 테스트
+
 @Configuration
 public class SpotifyConfig {
     
