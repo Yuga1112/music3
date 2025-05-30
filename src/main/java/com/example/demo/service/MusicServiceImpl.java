@@ -136,7 +136,7 @@ public class MusicServiceImpl implements MusicService {
 	        	    .durationMs(durationMs)
 	        	    .spotifyUrl(spotifyUrl)
 	        	    .albumImageUrl(albumImageUrl)
-	        	    .playlistId(playlistId)
+//	        	    .playlistId(playlistId)
 	        	    .build();
 
 	        musicRepository.save(musicEntity); // 저장

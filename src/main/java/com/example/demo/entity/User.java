@@ -37,6 +37,6 @@ public class User {
 	@Column(length = 20, nullable = false)
 	String role;
 	
-    String playlistId;
+//    String playlistId;
 	
 }

@@ -58,11 +58,26 @@
 			<div class="mb-3">
 			<label></label> 
 				<div class="input-group">
-				<input type="text" id="musicQuery" class="form-control"
+				<!-- <input type="text" id="musicQuery" class="form-control"
 						placeholder="검색할 음악을 입력하세요" />
 					<button type="button" class="btn btn-primary"
 						onclick="searchMusic()">검색</button>
-				</div>
+				</div> -->
+				
+				<!-- dto 필드와 name속성을 매핑 -->
+				<!-- value가 실제로 컨트롤러에 전달되는 값 (int) -->
+				<!-- 태그 사이에 있는건 사용자 화면에 보여주는 값 (마음대로) -->
+				<select name="musicNo" id="lang">
+				    <option value="1">Steven Universe/Love Like You</option>
+				    <option value="php">PHP</option>
+				    <option value="java">Java</option>
+				    <option value="golang">Golang</option>
+				    <option value="python">Python</option>
+				    <option value="c#">C#</option>
+				    <option value="C++">C++</option>
+				    <option value="erlang">Erlang</option>
+			    </select>
+				
 			</div>
 
 <div id="musicResults" class="mt-3">

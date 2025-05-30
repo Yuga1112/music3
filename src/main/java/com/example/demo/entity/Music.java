@@ -39,6 +39,6 @@ public class Music {
 
 	String albumImageUrl;
 	
-    String playlistId;
+//    String playlistId;
 
 }

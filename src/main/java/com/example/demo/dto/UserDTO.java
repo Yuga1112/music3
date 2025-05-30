@@ -26,5 +26,5 @@ public class UserDTO {
 	
 	String role;
 	
-	String playlistId;
+//	String playlistId;
 }
