@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.example.demo.dto.PostDTO;
+import com.example.demo.entity.Music;
 import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 
@@ -30,6 +31,8 @@ public class PostServiceImpl implements PostService{
 		
 //		dto.setMusicNo(1);
 		
+	
+		// 등록을 한다 엔티티를 dto로 변환해서 
 		Post entity = dtoToEntity(dto);
 		repository.save(entity);
 		int newNo = entity.getNo();

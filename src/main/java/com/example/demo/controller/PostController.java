@@ -37,24 +37,11 @@ public class PostController {
 	}
 	
 	@GetMapping("/post")
-	// https://open.spotify.com/playlist/0lbdVv8GxIpJehtEca2FFu?si=bUl9QJFjRwyedQHnkFV5_Q
-	public void register(@RequestParam(name = "0lbdVv8GxIpJehtEca2FFu", required = false) String playlistId,
-	                     @RequestParam(name = "index", required = false, defaultValue = "0") int index,
-	                     Model model) {
-
-	    if (playlistId != null) {
-	        try {
-	            MusicDTO track = musicService.getTrackFromPlaylist(playlistId, index);
-	            model.addAttribute("track", track); // 뷰에서 활용 가능
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            // 에러 메시지 모델에 추가할 수 있음
-	        }
-	    }
-
+	public void register() {
+		
 	}
 
-	
+	// 
 	@PostMapping("/post")
 	public String registerPost(PostDTO dto, RedirectAttributes redirectAttributes) {
 		int no = service.register(dto);
@@ -72,6 +59,9 @@ public class PostController {
 	@GetMapping("/read")
 	public void read(@RequestParam(name = "no") int no, Model model) {
 		PostDTO dto = service.read(no);
+		MusicDTO mdto = service.read(no);
+		// 이거 서비스구현 넣어야 함
+		
 		model.addAttribute("dto", dto);
 	}
 	
