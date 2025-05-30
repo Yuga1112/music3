@@ -24,18 +24,13 @@ import com.example.demo.config.SpotifyConfig;
 
 import com.example.demo.dto.MusicDTO;
 import com.example.demo.entity.Music;
-import com.example.demo.entity.Playlist;
 import com.example.demo.repository.MusicRepository;
-import com.example.demo.repository.PlaylistRepository;
 
 @Service
 public class MusicServiceImpl implements MusicService {
 
 	@Autowired
 	SpotifyConfig config;
-	
-	@Autowired
-	PlaylistRepository playRepository;
 	
 	@Autowired
 	MusicRepository musicRepository;
@@ -116,13 +111,13 @@ public class MusicServiceImpl implements MusicService {
 	    JSONObject json = new JSONObject(response.body());
 	    JSONArray items = json.getJSONObject("tracks").getJSONArray("items");
 
-	    // 플레이리스트가 DB에 없으면 저장
-	    Playlist playlist = playRepository.findByPlaylistId(playlistId)
-	            .orElseGet(() -> playRepository.save(
-	                Playlist.builder()
-	                    .playlistId(playlistId)
-	                    .build()
-	            ));
+//	    // 플레이리스트가 DB에 없으면 저장
+//	    Playlist playlist = playRepository.findByPlaylistId(playlistId)
+//	            .orElseGet(() -> playRepository.save(
+//	                Playlist.builder()
+//	                    .playlistId(playlistId)
+//	                    .build()
+//	            ));
 
 	    List<MusicDTO> musicList = new ArrayList<>();
 
@@ -141,7 +136,7 @@ public class MusicServiceImpl implements MusicService {
 	        	    .durationMs(durationMs)
 	        	    .spotifyUrl(spotifyUrl)
 	        	    .albumImageUrl(albumImageUrl)
-	        	    .playlist(playlist) // 연관된 플레이리스트 설정
+	        	    .playlistId(playlistId)
 	        	    .build();
 
 	        musicRepository.save(musicEntity); // 저장
@@ -198,26 +193,27 @@ public class MusicServiceImpl implements MusicService {
 	}
 
 
-	//음악검색
-	@Override
-	public String search(String query)
-			throws Exception {
+//	//음악검색
+//	@Override
+//	public String search(String query)
+//			throws Exception {
+//
+//		String accessToken = getAccessToken();
+//
+//		 return webClient.get()
+//			        .uri(uriBuilder -> {
+//			            UriBuilder builder = uriBuilder
+//			                .path("/v1/search")
+//			                .queryParam("q", query);
+//
+//			            return builder.build();
+//			        })
+//			        .headers(headers -> headers.setBearerAuth(accessToken))
+//			        .retrieve()
+//			        .bodyToMono(String.class)
+//			        .block();  // 여기서 block()으로 동기화
+//			}
 
-		String accessToken = getAccessToken();
-
-		 return webClient.get()
-			        .uri(uriBuilder -> {
-			            UriBuilder builder = uriBuilder
-			                .path("/v1/search")
-			                .queryParam("q", query);
-
-			            return builder.build();
-			        })
-			        .headers(headers -> headers.setBearerAuth(accessToken))
-			        .retrieve()
-			        .bodyToMono(String.class)
-			        .block();  // 여기서 block()으로 동기화
-			}
-	}
+}
 
 

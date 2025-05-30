@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 
 import com.example.demo.dto.MusicDTO;
 import com.example.demo.service.MusicService;
-import com.example.demo.service.PlaylistService;
 
 @RestController
 @RequestMapping("/")
@@ -23,8 +22,6 @@ public class MusicController {
 	@Autowired
 	MusicService musicService;
 
-	@Autowired
-	PlaylistService playlistService;
 
 	@GetMapping("/")
 	public ResponseEntity<List<MusicDTO>> getPlaylistTracks(@RequestParam String playlistId) {

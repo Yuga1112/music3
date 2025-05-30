@@ -25,6 +25,11 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public int register(PostDTO dto) {
 		
+		// 임시로 음악아이디 입력
+		// 나중에 화면에서 받아오세요
+		
+		dto.setMusicNo(1);
+		
 		Post entity = dtoToEntity(dto);
 		repository.save(entity);
 		int newNo = entity.getNo();

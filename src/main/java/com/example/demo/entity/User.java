@@ -37,7 +37,6 @@ public class User {
 	@Column(length = 20, nullable = false)
 	String role;
 	
-	  @OneToMany(mappedBy = "user")
-	  List<Playlist> playlists;
+    String playlistId;
 	
 }

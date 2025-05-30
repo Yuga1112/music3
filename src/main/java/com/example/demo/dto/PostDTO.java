@@ -21,7 +21,10 @@ public class PostDTO {
 	String title;
 	String content;
 	String writer;
-	MusicDTO music;
+	// 음악 수정
+	// MusicDTO music;
+	int musicNo;
+	
 	String albumImageUrl;
 	LocalDateTime regDate;
 }

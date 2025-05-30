@@ -26,5 +26,5 @@ public class UserDTO {
 	
 	String role;
 	
-	List<PlaylistDTO> playlists;
+	String playlistId;
 }

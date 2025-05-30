@@ -39,8 +39,6 @@ public class Music {
 
 	String albumImageUrl;
 	
-    @ManyToOne
-    @JoinColumn(name = "playlist_id")
-    Playlist playlist;
+    String playlistId;
 
 }

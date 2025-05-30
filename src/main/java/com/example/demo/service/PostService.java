@@ -32,16 +32,23 @@ public interface PostService {
 	void remove(int no);
 	
 	default Post dtoToEntity(PostDTO dto) {
+		
+		// post dto -> entity
+		
+		// music 꺼내서 entity로 만드는 중
+		
+		// 게시물 등록할 때
+		// 선택한 음악을 entity 만드는 거
 	    
-	    MusicDTO musicDto = dto.getMusic();
-
+	    int musicNo = dto.getMusicNo();
+	    
+	    // Music를 만드는 이유
+	    // Post의 Music 필드에 넣기 위해서
+	    // Music는 외래키!
+	    // 외래키를 만들때는 모든 정보를 저장할 필요x
+	    // pk만 넣으면 됨
 	    Music music = Music.builder()
-	            .id(musicDto.getId())
-	            .name(musicDto.getName())
-	            .artist(musicDto.getArtist())
-	            .durationMs(musicDto.getDurationMs())
-	            .spotifyUrl(musicDto.getSpotifyUrl())
-	            .albumImageUrl(musicDto.getAlbumImageUrl())
+	    		.id(musicNo)
 	            .build(); 
 
 	    return Post.builder()
@@ -57,14 +64,14 @@ public interface PostService {
 	default PostDTO entityToDto(Post entity) {
 	    Music music = entity.getMusic();
 
-	    MusicDTO musicDTO = MusicDTO.builder()
-	            .id(music.getId())
-	            .name(music.getName())
-	            .artist(music.getArtist())
-	            .durationMs(music.getDurationMs())
-	            .spotifyUrl(music.getSpotifyUrl())
-	            .albumImageUrl(music.getAlbumImageUrl())
-	            .build(); 
+//	    MusicDTO musicDTO = MusicDTO.builder()
+//	            .id(music.getId())
+//	            .name(music.getName())
+//	            .artist(music.getArtist())
+//	            .durationMs(music.getDurationMs())
+//	            .spotifyUrl(music.getSpotifyUrl())
+//	            .albumImageUrl(music.getAlbumImageUrl())
+//	            .build(); 
 
 	    return PostDTO.builder()
 	            .no(entity.getNo())
@@ -72,7 +79,7 @@ public interface PostService {
 	            .content(entity.getContent())
 	            .writer(entity.getWriter())
 	            .albumImageUrl(entity.getAlbumImageUrl())
-	            .music(musicDTO)
+	            .musicNo(entity.getMusic().getId())
 	            .build();
 	}
 
