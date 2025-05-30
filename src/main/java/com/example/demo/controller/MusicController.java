@@ -22,18 +22,14 @@ public class MusicController {
 
 	@Autowired
 	MusicService musicService;
-	
+
 	@Autowired
 	PlaylistService playlistService;
 
 	@GetMapping("/")
-    public ResponseEntity<List<MusicDTO>> getPlaylistTracks(@RequestParam String playlistId) {
-        List<MusicDTO> musicList = musicService.getPlaylist("")
-        return ResponseEntity.ok(musicList);
-    }
-
-
-	
-
+	public ResponseEntity<List<MusicDTO>> getPlaylistTracks(@RequestParam String playlistId) {
+		List<MusicDTO> musicList = musicService.getPlaylist("");
+		return ResponseEntity.ok(musicList);
 	}
 
+}

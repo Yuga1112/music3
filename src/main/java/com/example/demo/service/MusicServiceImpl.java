@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 
 import java.net.http.HttpRequest;
@@ -45,19 +47,34 @@ public class MusicServiceImpl implements MusicService {
 	WebClient webClient;
 
 	//토큰 발급
-	public String getAccessToken() throws Exception {
+	public String getAccessToken() {
 		String clientId = config.clientId;
 		String clientSecret = config.clientSecret;
 		String auth = clientId + ":" + clientSecret;
 		String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
 
-		HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://accounts.spotify.com/api/token"))
-				.header("Authorization", "Basic " + encodedAuth)
-				.header("Content-Type", "application/x-www-form-urlencoded")
-				.POST(HttpRequest.BodyPublishers.ofString("grant_type=client_credentials")).build();
+		HttpRequest request = null;
+		try {
+			request = HttpRequest.newBuilder().uri(new URI("https://accounts.spotify.com/api/token"))
+					.header("Authorization", "Basic " + encodedAuth)
+					.header("Content-Type", "application/x-www-form-urlencoded")
+					.POST(HttpRequest.BodyPublishers.ofString("grant_type=client_credentials")).build();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		HttpClient client = HttpClient.newHttpClient();
-		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		HttpResponse<String> response = null;
+		try {
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (response.statusCode() != 200) {
 			throw new RuntimeException("Spotify 토큰 발급 실패: " + response.body());
@@ -69,17 +86,32 @@ public class MusicServiceImpl implements MusicService {
 
 	// 재생목록 출력
 	@Override
-	public List<MusicDTO> getPlaylist(String playlistId) throws Exception {
+	public List<MusicDTO> getPlaylist(String playlistId) {
 	    String token = getAccessToken();
 
-	    HttpRequest request = HttpRequest.newBuilder()
-	            .uri(new URI("https://api.spotify.com/v1/playlists/" + playlistId))
-	            .header("Authorization", "Bearer " + token)
-	            .GET()
-	            .build();
+	    HttpRequest request = null;
+		try {
+			request = HttpRequest.newBuilder()
+			        .uri(new URI("https://api.spotify.com/v1/playlists/" + playlistId))
+			        .header("Authorization", "Bearer " + token)
+			        .GET()
+			        .build();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	    HttpClient client = HttpClient.newHttpClient();
-	    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+	    HttpResponse<String> response = null;
+		try {
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	    JSONObject json = new JSONObject(response.body());
 	    JSONArray items = json.getJSONObject("tracks").getJSONArray("items");

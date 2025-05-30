@@ -14,7 +14,7 @@ public interface MusicService {
 	String getAccessToken() throws Exception;
 	
 	//재생목록 가져오기
-	List<MusicDTO> getPlaylist(String playlistId) throws Exception;
+	List<MusicDTO> getPlaylist(String playlistId);
 
 	//재생목록에서 첫번째 반환
 	MusicDTO getTrackFromPlaylist(String playlistId, int index) throws Exception;
