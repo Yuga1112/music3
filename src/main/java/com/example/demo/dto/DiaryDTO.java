@@ -15,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostDTO {
+public class DiaryDTO {
 
 	int no;
 	String title;
@@ -25,7 +25,7 @@ public class PostDTO {
 	// MusicDTO music;
 	int musicNo;
 	
-	String type;
+
 	String albumImageUrl;
 	LocalDateTime regDate;
 }

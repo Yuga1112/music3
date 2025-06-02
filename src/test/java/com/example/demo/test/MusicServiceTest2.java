@@ -51,11 +51,11 @@ public class MusicServiceTest2 {
 	    	    }
 
 	    
-	    @Test
-		public void 트랙선택() throws Exception {
-		        
-		        MusicDTO result = service.getTrackFromPlaylist("0lbdVv8GxIpJehtEca2FFu", 3);  // 두 번째 트랙
-		        System.out.println("Track Info: " + result);
-
-	}
+//	    @Test
+//		public void 트랙선택() throws Exception {
+//		        
+//		        MusicDTO result = service.getTrackFromPlaylist("0lbdVv8GxIpJehtEca2FFu", 3);  // 두 번째 트랙
+//		        System.out.println("Track Info: " + result);
+//
+//	}
 	}

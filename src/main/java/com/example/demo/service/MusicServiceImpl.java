@@ -10,6 +10,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +24,9 @@ import org.springframework.web.util.UriBuilder;
 import com.example.demo.config.SpotifyConfig;
 
 import com.example.demo.dto.MusicDTO;
+
 import com.example.demo.entity.Music;
+
 import com.example.demo.repository.MusicRepository;
 
 @Service
@@ -126,7 +129,7 @@ public class MusicServiceImpl implements MusicService {
 
 	        String name = trackItem.getString("name");
 	        String artistName = trackItem.getJSONArray("artists").getJSONObject(0).getString("name");
-	        String durationMs = String.valueOf(trackItem.getInt("duration_ms"));
+	        int durationMs = Integer.valueOf(trackItem.getInt("duration_ms"));
 	        String spotifyUrl = trackItem.getJSONObject("external_urls").getString("spotify");
 	        String albumImageUrl = trackItem.getJSONObject("album").getJSONArray("images").getJSONObject(1).getString("url");
 
@@ -154,44 +157,57 @@ public class MusicServiceImpl implements MusicService {
 
 
 	// 상세출력
+//	@Override
+//	public MusicDTO getTrackFromPlaylist(String playlistId, int index) throws Exception {
+//	    String token = getAccessToken();
+//
+//	    HttpRequest request = HttpRequest.newBuilder()
+//	        .uri(new URI("https://api.spotify.com/v1/playlists/" + playlistId))
+//	        .header("Authorization", "Bearer " + token).GET().build();
+//
+//	    HttpClient client = HttpClient.newHttpClient();
+//	    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+//
+//	    JSONObject trackItem = new JSONObject(response.body())
+//	        .getJSONObject("tracks")
+//	        .getJSONArray("items")
+//	        .getJSONObject(index)
+//	        .getJSONObject("track");
+//
+//	    String name = trackItem.getString("name");
+//	    String artistName = trackItem.getJSONArray("artists").getJSONObject(0).getString("name");
+//
+//	    // 🟢 duration 포맷 직접 처리
+//	    int durationFormatted = Integer.format("%02d:%02d", 
+//	        trackItem.getInt("duration_ms") / 60000, 
+//	        (trackItem.getInt("duration_ms") % 60000) / 1000
+//	    );
+//
+//	    String spotifyUrl = trackItem.getJSONObject("external_urls").getString("spotify");
+//	    String albumImageUrl = trackItem.getJSONObject("album").getJSONArray("images").getJSONObject(1).getString("url");
+//
+//	    return MusicDTO.builder()
+//	        .name(name)
+//	        .artist(artistName)
+//	        .durationMs(durationFormatted) // 그대로 DTO에 담기
+//	        .spotifyUrl(spotifyUrl)
+//	        .albumImageUrl(albumImageUrl)
+//	        .build();
+//	}
+
 	@Override
-	public MusicDTO getTrackFromPlaylist(String playlistId, int index) throws Exception {
-	    String token = getAccessToken();
-
-	    HttpRequest request = HttpRequest.newBuilder()
-	        .uri(new URI("https://api.spotify.com/v1/playlists/" + playlistId))
-	        .header("Authorization", "Bearer " + token).GET().build();
-
-	    HttpClient client = HttpClient.newHttpClient();
-	    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-	    JSONObject trackItem = new JSONObject(response.body())
-	        .getJSONObject("tracks")
-	        .getJSONArray("items")
-	        .getJSONObject(index)
-	        .getJSONObject("track");
-
-	    String name = trackItem.getString("name");
-	    String artistName = trackItem.getJSONArray("artists").getJSONObject(0).getString("name");
-
-	    // 🟢 duration 포맷 직접 처리
-	    String durationFormatted = String.format("%02d:%02d", 
-	        trackItem.getInt("duration_ms") / 60000, 
-	        (trackItem.getInt("duration_ms") % 60000) / 1000
-	    );
-
-	    String spotifyUrl = trackItem.getJSONObject("external_urls").getString("spotify");
-	    String albumImageUrl = trackItem.getJSONObject("album").getJSONArray("images").getJSONObject(1).getString("url");
-
-	    return MusicDTO.builder()
-	        .name(name)
-	        .artist(artistName)
-	        .durationMs(durationFormatted) // 그대로 DTO에 담기
-	        .spotifyUrl(spotifyUrl)
-	        .albumImageUrl(albumImageUrl)
-	        .build();
+	public MusicDTO read(int no) {
+			
+			Optional<Music> result = musicRepository.findById(no);
+			
+			if(result.isPresent() ) {
+				Music music = result.get();
+				MusicDTO musicDTO = entityToDto(music);
+				return musicDTO;
+			} else {
+			return null;
+			}
 	}
-
 
 //	//음악검색
 //	@Override

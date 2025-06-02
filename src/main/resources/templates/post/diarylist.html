@@ -12,7 +12,7 @@
 
 <body>
    <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
+       <nav class="navbar navbar-expand-lg bg-body-tertiary px-3">
             <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/post/home}">로고</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -49,16 +49,16 @@
   </section>
 
   <!-- 카드 리스트 -->
+  
+  
   <section class="grid-container container">
-    <div class="card" th:each="dto : ${list}">
+    <div class="card" th:each="dto : ${diarylist}">
     
-      <a th:href="@{/post/read(id=${dto.no})}">
-      
-        <!-- <img th:src="${post.imageUrl != null ? post.imageUrl : 'https://via.placeholder.com/300x180'}"
-             class="card-img-top" alt="게시글 이미지"> -->
+      <a th:href="@{/post/diaryread(id=${dto.no})}">
+
       </a>
       <div class="card-content">
-        <a th:href="@{/post/read(no=${dto.no})}" class="h5 d-block mb-1">[[${dto.title}]]</a>
+        <a th:href="@{/post/diaryread(no=${dto.no})}" class="h5 d-block mb-1">[[${dto.title}]]</a>
         <div class="card-meta">
          <span> [[${dto.writer}]] ·
           [[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</span>

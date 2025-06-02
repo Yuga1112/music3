@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,7 +28,10 @@
                             <a class="nav-link" th:href="@{/post/list}">글 모음</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">마이페이지</a>
+                            <a class="nav-link" th:href="@{/post/diary}">일기쓰기</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/post/diarylist}">일기함</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/post/login}">로그인</a>
@@ -39,17 +42,17 @@
         </nav>
     </header>
 
-    <main class="container text-center mt-5">
-        <a th:href="@{/post/post}" class="text-dark text-decoration-none" style="border: none; background: none;">
+     <main class="container text-center mt-5">
+        <a th:href="@{/post/post}" class="text-dark text-decoration-none"
+            style="border: none; background: none; margin-right: 20px;">
             오늘의 음악 플레이
+        </a>
+        
+        <a th:href="@{/post/diary}" class="text-dark text-decoration-none" style="border: none; background: none;">
+            오늘의 일기 플레이
         </a>
     </main>
     
-
-    <script>
-        const audio = document.getElementById("globalAudioPlayer");
-        audio.src = "https://p.scdn.co/mp3-preview/5d6f7a9879e4b6b6fd76b70657cfbeb8efc31b2f?cid=YOUR_CLIENT_ID";
-    </script>
 </body>
 
 </html>

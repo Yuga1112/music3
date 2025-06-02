@@ -21,7 +21,7 @@ public class MusicDTO {
 
 	String artist;
 
-	String durationMs;
+	int durationMs;
 
 	String spotifyUrl;
 

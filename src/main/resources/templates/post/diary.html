@@ -42,9 +42,9 @@
         
         
     <div class="container mt-5">
-        <h2 class="mb-4">음악 플레이</h2>
+        <h2 class="mb-4">일기 플레이</h2>
 
-        <form th:action="@{/post/post}" th:method="post">
+        <form th:action="@{/post/diary}" th:method="diary">
 
 			<div class="mb-3">
 				<label></label> <input type="text" class="form-control" name="title"
@@ -59,11 +59,6 @@
 			<div class="mb-3">
 			<label></label> 
 				<div class="input-group">
-				<!-- <input type="text" id="musicQuery" class="form-control"
-						placeholder="검색할 음악을 입력하세요" />
-					<button type="button" class="btn btn-primary"
-						onclick="searchMusic()">검색</button>
-				</div> -->
 				
 				<!-- dto 필드와 name속성을 매핑 -->
 				<!-- value가 실제로 컨트롤러에 전달되는 값 (int) -->
@@ -92,7 +87,7 @@
 			</div>
 
 			<button type="submit" class="btn btn-primary">글 작성</button>
-            <a th:href="@{/post/list}" class="btn btn-secondary">목록으로</a>
+            <a th:href="@{/post/diarylist}" class="btn btn-secondary">목록으로</a>
         </form>
     </div>
     

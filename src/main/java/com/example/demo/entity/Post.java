@@ -45,6 +45,8 @@ public class Post extends Cdate {
 	
 	String albumImageUrl;
 	
+	String type;
+	
 	
 
 	

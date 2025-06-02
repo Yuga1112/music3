@@ -2,64 +2,57 @@
 
 import java.util.List;
 
-
-
-
-import com.example.demo.dto.PostDTO;
+import com.example.demo.dto.DiaryDTO;
+import com.example.demo.entity.Diary;
 import com.example.demo.entity.Music;
-import com.example.demo.entity.Post;
 
 
 
-public interface PostService {
+
+public interface DiaryService {
 
 	//게시물 등록
-	int register(PostDTO dto);
+	int register(DiaryDTO dto);
 	
 	//목록조회1
-	List<PostDTO> getList();
-	
-	//목록조회2
-	//Page<PostDTO> getList(int pageNumber);
+	List<DiaryDTO> getList();
 	
 	//상세조회
-	PostDTO read(int no);
+	DiaryDTO read(int no);
 	
 	//수정
-	void modify(PostDTO dto);
+	void modify(DiaryDTO dto);
 	
 	//삭제
 	void remove(int no);
 	
-	default Post dtoToEntity(PostDTO dto) {
+	default Diary dtoToEntity(DiaryDTO dto) {
 	    
 	    int musicNo = dto.getMusicNo();
 	    Music music = Music.builder()
 	    		.id(musicNo)
 	            .build(); 
 
-	    return Post.builder()
+	    return Diary.builder()
 	            .no(dto.getNo())
 	            .title(dto.getTitle())
 	            .content(dto.getContent())
 	            .writer(dto.getWriter())
-	            .type(dto.getType())
 	            .albumImageUrl(dto.getAlbumImageUrl())
 	            .music(music)
 	            .build();
 	}
 	
-	default PostDTO entityToDto(Post entity) {
+	default DiaryDTO entityToDto(Diary entity) {
 	    Music music = entity.getMusic();
 
-	    return PostDTO.builder()
+	    return DiaryDTO.builder()
 	            .no(entity.getNo())
 	            .title(entity.getTitle())
 	            .content(entity.getContent())
 	            .writer(entity.getWriter())
 	            .albumImageUrl(entity.getAlbumImageUrl())
 	            .regDate(entity.getRegDate())
-	            .type(entity.getType())
 	            .musicNo(entity.getMusic().getId())
 	            .build();
 	}
